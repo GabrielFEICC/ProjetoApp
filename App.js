@@ -90,3 +90,30 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: 'white',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'gray',
+    marginBottom: 16,
+  },
+  listItem: {
+    fontSize: 18,
+    marginBottom: 8,
+  },
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  image: {
+    width: 60,
+    height: 60,
+    marginRight: 16,
+  },
+});
