@@ -53,3 +53,31 @@ function TopTeamsScreen() {
     </View>
   );
 }
+
+//configuracao da navegacao usando as abas
+function MainTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Maiores Vencedores"
+        component={TopDriversScreen}
+        options={{
+          tabBarLabel: 'Maiores Vencedores',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="trophy" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Equipes Com Mais Títulos"
+        component={TopTeamsScreen}
+        options={{
+          tabBarLabel: 'Equipes Com Mais Títulos',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="shield-check" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
