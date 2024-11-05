@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import { View, Text, TextInput, Button, FlatList, Image, Alert, Dimensions, StyleSheet, TouchableOpacity, Vibration } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Accelerometer } from 'expo-sensors';
+import React from 'react';
+import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -26,6 +23,30 @@ function TopDriversScreen() {
           <View style={styles.item}>
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.listItem}>{item.name} - {item.wins} vitórias</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+}
+
+//tela para mostrar as equipes com mais titulos
+function TopTeamsScreen() {
+  const topTeams = [
+    { name: 'Ferrari', titles: 16, image: 'https://di-uploads-pod15.dealerinspire.com/lakeforestsportscars/uploads/2021/06/Ferrari-Logo.png' },
+    { name: 'McLaren', titles: 8, image: 'https://static.vecteezy.com/system/resources/previews/020/500/043/non_2x/mclaren-brand-logo-symbol-orange-design-british-car-automobile-illustration-free-vector.jpg' },
+    { name: 'Mercedes', titles: 8, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png' },
+  ];
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Equipes com Mais Títulos</Text>
+      <FlatList
+        data={topTeams}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <Text style={styles.listItem}>{item.name} - {item.titles} títulos</Text>
           </View>
         )}
       />
