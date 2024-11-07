@@ -1,10 +1,79 @@
-import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet, FlatList, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+//funcao para fazer o login
+function LoginScreen({ navigation }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    const storedPassword = await AsyncStorage.getItem(username);
+    if (storedPassword === password) {
+      navigation.replace('MainTabs'); //vai para a aba principal apos fazer o login
+    } else {
+      Alert.alert('Erro', 'Usuário ou senha incorretos');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        placeholder="Usuário"
+        onChangeText={setUsername}
+        value={username}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Senha"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Button title="Entrar" onPress={handleLogin} />
+    </View>
+  );
+}
+
+//funcao para fazer o cadastro
+function SignupScreen() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignup = async () => {
+    await AsyncStorage.setItem(username, password);
+    Alert.alert('Cadastro', 'Usuário cadastrado com sucesso!');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Cadastro</Text>
+      <TextInput
+        placeholder="Novo Usuário"
+        onChangeText={setUsername}
+        value={username}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Nova Senha"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Button title="Cadastrar" onPress={handleSignup} />
+    </View>
+  );
+}
 
 //tela dos pilotos com mais vitorias
 function TopDriversScreen() {
@@ -54,7 +123,7 @@ function TopTeamsScreen() {
   );
 }
 
-//configuracao da navegacao usando as abas
+//configuracao da navegacao principal usando as abas
 function MainTabs() {
   return (
     <Tab.Navigator>
@@ -82,11 +151,47 @@ function MainTabs() {
   );
 }
 
+//funcao para navegar entre as abas de login e cadastro
+function AuthTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="login" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cadastro"
+        component={SignupScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-plus" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+//funcao para configurar o stack navigator para alterar entre as abas de login e cadastro e as abas principais do app
+function AppNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AuthTabs" component={AuthTabs} />
+      <Stack.Screen name="MainTabs" component={MainTabs} />
+    </Stack.Navigator>
+  );
+}
+
 //componente principal para fazer a nevagação
 export default function App() {
   return (
     <NavigationContainer>
-      <MainTabs />
+      <AppNavigator />
     </NavigationContainer>
   );
 }
@@ -99,12 +204,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'gray',
+    color: 'black',
     marginBottom: 16,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 8,
+    marginBottom: 16,
+    borderRadius: 4,
   },
   listItem: {
     fontSize: 18,
-    marginBottom: 8,
+    color: 'black',
   },
   item: {
     flexDirection: 'row',
