@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, TextInput, Button, Alert, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Audio } from 'expo-av';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,6 +9,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+//dados dos pilotos
+const topDrivers = [
+  { name: 'Lewis Hamilton', wins: 105, titles: 7, age: 38, team: 'Mercedes', image: 'https://media.gettyimages.com/id/1809475095/pt/foto/abu-dhabi-united-arab-emirates-lewis-hamilton-of-great-britain-and-mercedes-looks-on-at-the.jpg?s=612x612&w=gi&k=20&c=scihQt3ACLgvkvSE_aBcEPGWpEGGL2Ff0AJ7OY6BtPQ=' },
+  { name: 'Michael Schumacher', wins: 91, titles: 7, age: 54, team: 'Sem time / Aposentado', image: 'https://conteudo.imguol.com.br/c/splash/bf/2023/04/24/michael-schumacher-1682348334238_v2_4x3.jpg' },
+  { name: 'Max Verstappen', wins: 62, titles: 3, age: 26, team: 'Red Bull', image: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/max-verstappen-gp-espanha-e1719165031235.jpg?w=956' },
+];
 
 //funcao para fazer o login
 function LoginScreen({ navigation }) {
@@ -76,12 +84,13 @@ function SignupScreen() {
 }
 
 //tela dos pilotos com mais vitorias
-function TopDriversScreen() {
-  const topDrivers = [
-    { name: 'Lewis Hamilton', wins: 105, image: 'https://media.gettyimages.com/id/1809475095/pt/foto/abu-dhabi-united-arab-emirates-lewis-hamilton-of-great-britain-and-mercedes-looks-on-at-the.jpg?s=612x612&w=gi&k=20&c=scihQt3ACLgvkvSE_aBcEPGWpEGGL2Ff0AJ7OY6BtPQ=' },
-    { name: 'Michael Schumacher', wins: 91, image: 'https://conteudo.imguol.com.br/c/splash/bf/2023/04/24/michael-schumacher-1682348334238_v2_4x3.jpg' },
-    { name: 'Max Verstappen', wins: 62, image: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/max-verstappen-gp-espanha-e1719165031235.jpg?w=956' },
-  ];
+function TopDriversScreen({ navigation }) {
+  const playSound = async () => {
+    const { sound } = await Audio.Sound.createAsync(
+      require('./assets/751867__geoff-bremner-audio__formula-1-racecar-passby.wav') 
+    );
+    await sound.playAsync();
+  };
 
   return (
     <View style={styles.container}>
@@ -89,12 +98,35 @@ function TopDriversScreen() {
       <FlatList
         data={topDrivers}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <Text style={styles.listItem}>{item.name} - {item.wins} vitórias</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              playSound();
+              navigation.navigate('DriverDetails', { driver: item });
+            }}
+          >
+            <View style={styles.item}>
+              <Image source={{ uri: item.image }} style={styles.image} />
+              <Text style={styles.listItem}>{item.name} - {item.wins} vitórias</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
+    </View>
+  );
+}
+
+//tela de detalhes do piloto selecionado com botao de voltar
+function DriverDetailsScreen({ route, navigation }) {
+  const { driver } = route.params;
+  return (
+    <View style={styles.container}>
+      <Image source={{ uri: driver.image }} style={styles.imageLarge} />
+      <Text style={styles.title}>{driver.name}</Text>
+      <Text style={styles.details}>Vitórias: {driver.wins}</Text>
+      <Text style={styles.details}>Títulos: {driver.titles}</Text>
+      <Text style={styles.details}>Idade: {driver.age} anos</Text>
+      <Text style={styles.details}>Equipe: {driver.team}</Text>
+      <Button title="Voltar" onPress={() => navigation.goBack()} /> 
     </View>
   );
 }
@@ -183,6 +215,7 @@ function AppNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="AuthTabs" component={AuthTabs} />
       <Stack.Screen name="MainTabs" component={MainTabs} />
+      <Stack.Screen name="DriverDetails" component={DriverDetailsScreen} />
     </Stack.Navigator>
   );
 }
@@ -228,5 +261,18 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginRight: 16,
+  },
+  imageLarge: {
+    width: 120,
+    height: 120,
+    alignSelf: 'center',
+    marginBottom: 16,
+    marginTop: 30, 
+  },
+  
+  details: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginVertical: 8,
   },
 });
