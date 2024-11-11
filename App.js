@@ -17,6 +17,31 @@ const topDrivers = [
   { name: 'Max Verstappen', wins: 62, titles: 3, age: 26, team: 'Red Bull', image: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/max-verstappen-gp-espanha-e1719165031235.jpg?w=956' },
 ];
 
+//dados das equipes
+const topTeams = [
+  { 
+    name: 'Ferrari', 
+    titles: 16, 
+    image: 'https://logos-world.net/wp-content/uploads/2020/05/Ferrari-Emblem.png',
+    founded: '1929',
+    drivers: ['Charles Leclerc', 'Carlos Sainz']
+  },
+  { 
+    name: 'McLaren', 
+    titles: 8, 
+    image: 'https://static.vecteezy.com/system/resources/previews/020/500/043/non_2x/mclaren-brand-logo-symbol-orange-design-british-car-automobile-illustration-free-vector.jpg',
+    founded: '1963',
+    drivers: ['Lando Norris', 'Oscar Piastri']
+  },
+  { 
+    name: 'Mercedes', 
+    titles: 8, 
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png',
+    founded: '1954',
+    drivers: ['Lewis Hamilton', 'George Russell']
+  },
+];
+
 //funcao para fazer o login
 function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
@@ -131,24 +156,40 @@ function DriverDetailsScreen({ route, navigation }) {
   );
 }
 
-//tela para mostrar as equipes com mais titulos
-function TopTeamsScreen() {
-  const topTeams = [
-    { name: 'Ferrari', titles: 16, image: 'https://logos-world.net/wp-content/uploads/2020/05/Ferrari-Emblem.png' },
-    { name: 'McLaren', titles: 8, image: 'https://static.vecteezy.com/system/resources/previews/020/500/043/non_2x/mclaren-brand-logo-symbol-orange-design-british-car-automobile-illustration-free-vector.jpg' },
-    { name: 'Mercedes', titles: 8, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png' },
-  ];
+//tela de detalhes da equipe selecionada com botao de voltar
+function TeamDetailsScreen({ route, navigation }) {
+  const { team } = route.params;
+  return (
+    <View style={styles.container}>
+      <Image source={{ uri: team.image }} style={styles.imageLarge} />
+      <Text style={styles.title}>{team.name}</Text>
+      <Text style={styles.details}>Títulos: {team.titles}</Text>
+      <Text style={styles.details}>Fundada em: {team.founded}</Text>
+      <Text style={styles.details}>Pilotos Atuais:</Text>
+      {team.drivers.map((driver, index) => (
+        <Text key={index} style={styles.details}>{driver}</Text>
+      ))}
+      <Button title="Voltar" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
 
+//tela para mostrar as equipes com mais titulos
+function TopTeamsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Equipes com Mais Títulos</Text>
       <FlatList
         data={topTeams}
         renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <Text style={styles.listItem}>{item.name} - {item.titles} títulos</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TeamDetails', { team: item })}
+          >
+            <View style={styles.item}>
+              <Image source={{ uri: item.image }} style={styles.image} />
+              <Text style={styles.listItem}>{item.name} - {item.titles} títulos</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>
@@ -216,6 +257,7 @@ function AppNavigator() {
       <Stack.Screen name="AuthTabs" component={AuthTabs} />
       <Stack.Screen name="MainTabs" component={MainTabs} />
       <Stack.Screen name="DriverDetails" component={DriverDetailsScreen} />
+      <Stack.Screen name="TeamDetails" component={TeamDetailsScreen} />
     </Stack.Navigator>
   );
 }
@@ -269,7 +311,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginTop: 30, 
   },
-  
   details: {
     fontSize: 18,
     textAlign: 'center',
