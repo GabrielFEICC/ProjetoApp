@@ -15,6 +15,10 @@ const topDrivers = [
   { name: 'Lewis Hamilton', wins: 105, titles: 7, age: 38, team: 'Mercedes', image: 'https://media.gettyimages.com/id/1809475095/pt/foto/abu-dhabi-united-arab-emirates-lewis-hamilton-of-great-britain-and-mercedes-looks-on-at-the.jpg?s=612x612&w=gi&k=20&c=scihQt3ACLgvkvSE_aBcEPGWpEGGL2Ff0AJ7OY6BtPQ=' },
   { name: 'Michael Schumacher', wins: 91, titles: 7, age: 54, team: 'Sem time / Aposentado', image: 'https://conteudo.imguol.com.br/c/splash/bf/2023/04/24/michael-schumacher-1682348334238_v2_4x3.jpg' },
   { name: 'Max Verstappen', wins: 62, titles: 3, age: 26, team: 'Red Bull', image: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/06/max-verstappen-gp-espanha-e1719165031235.jpg?w=956' },
+  { name: 'Sebastian Vettel', wins: 53, titles: 4, age: 37, team: 'Sem time / Aposentado', image: 'https://www.grandepremio.com.br/wp-content/uploads/2020/07/EceM2acXkAEmW-g.jpg'},
+  { name: 'Alain Prost', wins: 51, titles: 3, age: 69, team: 'Sem time / Aposentado', image: 'https://media.gettyimages.com/id/537112233/pt/foto/alain-prost-of-france-driver-of-the-marlboro-mclaren-international-mclaren-tag-mp4-2c-during.jpg?s=612x612&w=gi&k=20&c=iby91J6GIJe6dnG4wxQJH0Eor6bBs1RI67vitj3os34=' },
+  { name: 'Ayrton Senna', wins: 41, titles: 3, age: 34, team: 'Faleceu com 34 anos', image: 'https://clube101.com.br/wsite/_upl/noticias/9e29147e7ab45ecb6cd81860056769a3.jpg'},
+  { name: 'Fernardo Alonso', wins: 32, titles: 2, age: 43, team: 'Aston Martin', image: 'https://blog.portoseguro.com.br/wordpress/wp-content/uploads/2022/10/fernando-alonso-2048x1365.jpg'}
 ];
 
 //dados das equipes
@@ -25,6 +29,13 @@ const topTeams = [
     image: 'https://logos-world.net/wp-content/uploads/2020/05/Ferrari-Emblem.png',
     founded: '1929',
     drivers: ['Charles Leclerc', 'Carlos Sainz']
+  },
+  {
+    name: 'Williams',
+    titles: 9,
+    image: 'https://speedstore.store/9816-large_default/williams-f1-logo-iron-on-patches-and-stickers.jpg',
+    founded: '1977',
+    drivers: ['Alex Albon', 'Franco Colapinto']
   },
   { 
     name: 'McLaren', 
@@ -40,6 +51,13 @@ const topTeams = [
     founded: '1954',
     drivers: ['Lewis Hamilton', 'George Russell']
   },
+  {
+    name: 'Red Bull',
+    titles: 6,
+    image: 'https://img.redbull.com/images/w_950/redbullcom/2024/6/12/a2dsocx2qlbi8imuah8w/red-bull-logo',
+    founded: '2005',
+    drivers: ['Max Verstappen', 'Sergio Perez']
+  }
 ];
 
 //funcao para fazer o login
