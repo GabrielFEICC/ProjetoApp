@@ -54,7 +54,7 @@ const topTeams = [
   {
     name: 'Red Bull',
     titles: 6,
-    image: 'https://img.redbull.com/images/w_950/redbullcom/2024/6/12/a2dsocx2qlbi8imuah8w/red-bull-logo',
+    image: 'https://cdn-7.motorsport.com/static/img/ugl/6100000/6190000/6195000/6195400/6195400/s700/f1-logo-da-red-bull-2014.jpg',
     founded: '2005',
     drivers: ['Max Verstappen', 'Sergio Perez']
   }
