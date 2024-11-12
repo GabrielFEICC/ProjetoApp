@@ -90,7 +90,8 @@ function LoginScreen({ navigation }) {
         secureTextEntry
         style={styles.input}
       />
-      <Button title="Entrar" onPress={handleLogin} />
+      <Button title="Entrar" onPress={handleLogin} 
+       color = 'gray'/>
     </View>
   );
 }
@@ -121,7 +122,8 @@ function SignupScreen() {
         secureTextEntry
         style={styles.input}
       />
-      <Button title="Cadastrar" onPress={handleSignup} />
+      <Button title="Cadastrar" onPress={handleSignup} 
+       color = 'gray'/>
     </View>
   );
 }
@@ -247,7 +249,7 @@ function AuthTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Login"
+        name="Faça Login no App da Formula 1"
         component={LoginScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -256,7 +258,7 @@ function AuthTabs() {
         }}
       />
       <Tab.Screen
-        name="Cadastro"
+        name="Faça Cadastro no App da Formula 1"
         component={SignupScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
