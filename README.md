@@ -4,7 +4,7 @@ Este é um aplicativo que permite que os fãs de Fórmula 1 possam olhar as esta
 
 # Motivação
 
-A Fórmula 1 é um dos esportes mais populares do mundo que atrai fãs do mundo inteiro, minha motivação de fazer esse aplicativo é que sou muito fã do esporte, esse aplicativo foi desenvolvido por esse motivo e para oferecer esse aplicativo para que aproxime todos os fãs de Fórmula 1. Acredito que muitos fãs do esporte também fariam esse aplicativo.
+A Fórmula 1 é um dos esportes mais populares do mundo que atrai fãs do mundo inteiro, minha motivação de fazer esse aplicativo é que sou muito fã do esporte, esse aplicativo foi desenvolvido por esse motivo e para oferecer esse aplicativo para que aproxime todos os fãs de Fórmula 1, permitindo que explorem as histórias e as conquistas dos grandes pilotos e equipes. Acredito que muitos fãs do esporte também fariam esse aplicativo.
 
 # Objetivo
 
