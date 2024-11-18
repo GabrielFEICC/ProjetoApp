@@ -1,6 +1,6 @@
 # Projeto Aplicativo de Formula 1
 
-Este é um aplicativo que permite que os fãs de Fórmula 1 possam olhar as estatísticas dos pilotos e as equipes. Neste aplicativo, você consegue ver os maiores vencedores da história, ver os detalhes deles, como títulos, idade e a equipe atual, das equipes consegue ver os detalhes também, que contém os títulos, ano de fundação e os pilotos atuais.
+Este é um aplicativo que permite que os fãs de Fórmula 1 possam olhar as estatísticas dos pilotos e as equipes. Neste aplicativo, você consegue ver os maiores vencedores da história, ver os detalhes deles, como títulos, idade e a equipe atual, das equipes consegue ver os detalhes também, que contém os títulos, ano de fundação e os pilotos atuais. O aplicativo proporciona uma experiência muita boa para quem quer explorar o mundo da Fórmula 1, sendo tanto dos pilotos e também das equipes.
 
 # Motivação
 
@@ -8,7 +8,7 @@ A Fórmula 1 é um dos esportes mais populares do mundo que atrai fãs do mundo 
 
 # Objetivo
 
-O objetivo principal do aplicativo é mostras algumas informações sobre pilotos e equipes da Fórmula 1. Através do app, o usuário pode acessar facilmente informações sobre os pilotos com mais vitórias na história da Fórmula 1, assim como as equipes com mais títulos. Além disso, o app permite uma visão detalhada de cada piloto e equipe, fazendo que o usuário tenha uma experiência completa dos principais pilotos e equipes da história do esporte.
+O objetivo principal do aplicativo é mostras algumas informações sobre pilotos e equipes da Fórmula 1. Através do app, o usuário pode acessar facilmente informações sobre os pilotos com mais vitórias na história da Fórmula 1, assim como as equipes com mais títulos. Além disso, o app permite uma visão detalhada de cada piloto e equipe, o app proporciona ao usuário uma experiência completa, permitindo uma imersão cheia de informações dos principais pilotos e equipes que marcaram a história da Fórmula 1.
 
 # Funcionalidades
 
